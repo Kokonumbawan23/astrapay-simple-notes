@@ -4,6 +4,8 @@ Project ini dibuat untuk memenuhi kebutuhan front-end dari https://github.com/Ko
 #### Author Information
 Muhammad Rizki Firmansyah
 
+### Petunjuk Pemakaian
+
 Untuk menjalankan server, bisa masukkan perintah berikut:
 
 ```bash
