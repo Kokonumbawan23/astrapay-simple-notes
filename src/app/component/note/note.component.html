@@ -1,0 +1,60 @@
+<main>
+  <div class="flex justify-between items-center w-full p-8">
+    <h1 class="font-bold text-4xl">
+      Simple Notes
+    </h1>
+
+    <div class="flex flex-wrap gap-10 items-center justify-center">
+      <p-button severity="info" (click)="showCreateForm()">
+        <span class="flex items-center gap-2 font-bold">
+          <i class="pi pi-plus" style="font-weight: bolder;"></i>
+          <span>Add Note</span>
+        </span>
+      </p-button>
+    </div>
+  </div>
+
+  <div *ngIf="data.length === 0" class="flex justify-center items-center w-full h-[80vh]">
+    <p-card>
+      <p class="text-center text-lg">No notes found.</p>
+    </p-card>
+  </div>
+
+  <div class="flex flex-col gap-6 w-full justiy-center items-center">
+    <p-card header="{{ note.title }}" class="relative mx-10 w-2/3" *ngFor="let note of data">
+      <div
+        class="absolute flex gap-2 opacity-0 w-full h-full justify-end top-0 right-0 hover:opacity-100 transition-opacity duration-300">
+        <p-button icon="pi pi-eye" severity="success" [outlined]="true" />
+        <p-button (click)="showEditForm(note)" icon="pi pi-pencil" severity="info" [outlined]="true" />
+        <p-button (click)="confirmDelete(note)" icon="pi pi-times" severity="danger" [outlined]="true" />
+      </div>
+      <p class="text-md text-justify">
+        {{ note.content }}
+      </p>
+    </p-card>
+  </div>
+
+  <p-confirmdialog />
+  <p-dialog header="{{ formType + ' Form' }}" [modal]="true" [(visible)]="formVisibility" [style]="{ width: '50vw' }">
+    <span class="p-text-secondary block mb-8">{{ this.formType + " Your Note" }}.</span>
+    <form [formGroup]="formGroup">
+      <div class="flex items-center gap-4 mb-4">
+        <label for="title" class="font-semibold w-24">Title</label>
+        <input type="text" pInputText
+          class="focus:outline-none flex-auto p-3 dark:bg-black dark:text-white rounded-sm border border-green-500"
+          [ngClass]="{ 'border-red-300 focus:border-green-300': formGroup.controls['title'].invalid && formGroup.controls['title'].touched,
+
+        }" formControlName="title" id="title" autocomplete="off" />
+      </div>
+      <div class="flex items-center gap-4 mb-8">
+        <label for="content" class="font-semibold w-24">Content</label>
+        <textarea formControlName="content" rows="5" cols="30" pTextarea id="content" class="flex-auto"
+          autocomplete="off"></textarea>
+      </div>
+      <div class="flex justify-end gap-2">
+        <p-button label="Cancel" severity="secondary" (click)="formVisibility = false" />
+        <p-button type="submit" label="Save" (click)="submitForm()" />
+      </div>
+    </form>
+  </p-dialog>
+</main>
