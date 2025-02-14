@@ -6,6 +6,12 @@ Muhammad Rizki Firmansyah
 
 ### Petunjuk Pemakaian
 
+Lakukan instalasi dependencies menggunakan perintah:
+
+```bash
+npm install
+```
+
 Untuk menjalankan server, bisa masukkan perintah berikut:
 
 ```bash
